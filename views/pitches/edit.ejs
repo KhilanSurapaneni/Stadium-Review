@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editing Pitch</title>
+</head>
+
+<body>
+    <form action="/pitches/<%= pitch._id %>?_method=PATCH" method="post">
+        <div>
+            <label for="title">Enter Title</label>
+            <input type="text" name="pitch[title]" id="title" value="<%=pitch.title%>">
+        </div>
+
+        <div>
+            <label for="location">Enter Location</label>
+            <input type="text" name="pitch[location]" id="location" value="<%=pitch.location%>">
+        </div>
+
+        <button>Update Pitch</button>
+
+    </form>
+    <a href="http://localhost:3000/pitches">Back to Index</a>
+</body>
+
+</html>

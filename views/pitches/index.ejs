@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitches</title>
+</head>
+<body>
+    <h1>All Pitches</h1>
+    <a href="http://localhost:3000/pitches/new">Add New Pitch</a>
+    <ul>
+        <%for(let pitch of pitches){%>
+            <li><a href="http://localhost:3000/pitches/<%=pitch._id%>"><%=pitch.title%></a></li>
+        <%}%>
+    </ul>
+    
+</body>
+</html>
