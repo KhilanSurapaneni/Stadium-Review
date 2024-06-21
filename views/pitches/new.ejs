@@ -1,33 +1,36 @@
 <% layout("layouts/boilerplate") %>
 <div class="container mt-5">
     <h1 class="text-center mb-4">New Campground</h1>
-    <form action="http://localhost:3000/pitches" method="post" class="mx-auto" style="max-width: 600px;">
+    <form action="http://localhost:3000/pitches" method="post" class="mx-auto needs-validation" style="max-width: 600px;" novalidate>
         <div class="mb-3">
             <label for="title" class="form-label">Enter Title</label>
-            <input type="text" name="pitch[title]" id="title" class="form-control">
+            <input type="text" name="pitch[title]" id="title" class="form-control" required>
         </div>
 
         <div class="mb-3">
             <label for="location" class="form-label">Enter Location</label>
-            <input type="text" name="pitch[location]" id="location" class="form-control">
+            <input type="text" name="pitch[location]" id="location" class="form-control" required>
         </div>
 
         <div class="mb-3">
             <label for="price" class="form-label">Enter Price</label>
             <div class="input-group">
                 <span class="input-group-text">$</span>
-                <input type="number" name="pitch[price]" id="price" class="form-control" placeholder="0.00">
+                <input type="number" name="pitch[price]" id="price" class="form-control" step="0.01" placeholder="10.00" required>
+                <div class="invalid-feedback">
+                    Please enter a valid dollar amount (e.g. 17.31, 16.01, etc.).
+                </div>
             </div>
         </div>
 
         <div class="mb-3">
             <label for="image" class="form-label">Enter Image URL</label>
-            <input type="text" name="pitch[image]" id="image" class="form-control">
+            <input type="text" name="pitch[image]" id="image" class="form-control" required>
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Enter Description</label>
-            <input type="text" name="pitch[description]" id="description" class="form-control">
+            <input type="text" name="pitch[description]" id="description" class="form-control" required>
         </div>
 
         <button type="submit" class="btn btn-success w-100">Add Pitch</button>

@@ -2,6 +2,10 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const Pitch = require("./models/pitch");
+const Joi = require("joi")
+const {pitchSchema} = require("./schemas");
+const catchAsync = require('./utils/catchAsync');
+const ExpressError = require("./utils/expressError");
 const methodOverride = require('method-override');
 const path = require("path");
 
@@ -25,48 +29,75 @@ app.engine("ejs", ejsMate);
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+//middleware for validaion
+const validatePitch = (req, res, next) => {
+    const { error } = pitchSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+}
+
 app.get("/", (req, res) => {
     res.render("home");
 });
 
-app.get("/pitches", async (req, res) => {
+app.get("/pitches", catchAsync(async (req, res) => {
     const pitches = await Pitch.find({});
     res.render("pitches/index", { pitches });
-});
+}));
 
 app.get("/pitches/new", (req, res) => {
     res.render("pitches/new");
 });
 
-app.post("/pitches", async (req, res) => {
+app.post("/pitches", validatePitch, catchAsync(async (req, res) => {
     const pitch = new Pitch(req.body.pitch);
     await pitch.save();
     res.redirect(`/pitches/${pitch._id}`);
-});
+}));
 
-app.get("/pitches/edit/:id", async (req, res) => {
+app.get("/pitches/edit/:id", catchAsync(async (req, res) => {
     const { id } = req.params;
     const pitch = await Pitch.findById(id);
     res.render("pitches/edit", { pitch });
-});
+}));
 
-app.get("/pitches/:id", async (req, res) => {
+app.get("/pitches/:id", catchAsync(async (req, res) => {
     const { id } = req.params;
     const pitch = await Pitch.findById(id);
     res.render("pitches/details", { pitch });
-});
+}));
 
-app.patch("/pitches/:id", async (req, res) => {
+app.patch("/pitches/:id", validatePitch, catchAsync(async (req, res) => {
     const { id } = req.params;
     const pitch = await Pitch.findByIdAndUpdate(id, req.body.pitch, { new: true });
     res.redirect(`/pitches/${pitch._id}`);
-});
+}));
 
-app.delete("/pitches/:id", async (req,res) => {
-    const {id} = req.params;
+app.delete("/pitches/:id", catchAsync(async (req, res) => {
+    const { id } = req.params;
     await Pitch.findByIdAndDelete(id);
     res.redirect("/pitches");
+}));
+
+//this is for every path, will only run if nothing is matched
+app.all("*", (req, res, next) => {
+    return next(new ExpressError("Page not Found", 404))
 })
+
+app.use((err, req, res, next) => {
+    const { status = 500 } = err;
+    if (!err.message) {
+        err.message = "There was an Error"
+    }
+    else if (!err.status) {
+        err.status = 500;
+    }
+    res.status(status).render("error", { err });
+});
 
 app.listen(3000, () => {
     console.log("http://localhost:3000/");
