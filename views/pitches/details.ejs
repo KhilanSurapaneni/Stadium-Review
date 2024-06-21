@@ -1,26 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=pitch.title%></title>
-</head>
-<body>
-    <h1><%=pitch.title%></h1>
-    <h2><%=pitch.location%></h2>
-
-    <div>
-        <a href="http://localhost:3000/pitches/edit/<%=pitch._id%>"">Edit Pitch</a>
+<% layout("layouts/boilerplate") %>
+    <div class="card mb-3 mx-auto" style="max-width: 540px;">
+        <img src="<%=pitch.image%>" class="card-img-top" alt="...">
+        <div class="card-body text-center">
+            <h5 class="card-title">
+                <%=pitch.title%>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+                <%=pitch.location%>
+            </h6>
+            <p class="card-text">
+                <%=pitch.description%>
+            </p>
+            <p class="card-text"><small class="text-muted">
+                    $<%=pitch.price%>/night
+                </small></p>
+            <a href="http://localhost:3000/pitches/edit/<%=pitch._id%>" class="btn btn-primary">Edit</a>
+            <form action="http://localhost:3000/pitches/<%=pitch._id%>?_method=DELETE" method="post" class="d-inline">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+            <p class="card-text"><small class="text-muted">2 days ago</small></p>
+            <a href="http://localhost:3000/pitches" class="card-link">View all Pitches</a>
+        </div>
     </div>
-
-    <div>
-        <a href="http://localhost:3000/pitches">Back to Index</a>
-    </div>
-    
-    <div>
-        <form action="http://localhost:3000/pitches/<%=pitch._id%>?_method=DELETE" method = "post">
-            <button>Delete Pitch</button>
-        </form>
-    </div>
-</body>
-</html>

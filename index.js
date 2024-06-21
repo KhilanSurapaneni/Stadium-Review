@@ -18,6 +18,8 @@ mongoose.connect('mongodb://localhost:27017/pitch-review')
 // EJS setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+const ejsMate = require("ejs-mate");
+app.engine("ejs", ejsMate);
 
 // Express Middleware
 app.use(express.urlencoded({ extended: true }));

@@ -1,28 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Pitch</title>
-</head>
-
-<body>
-    <form action="http://localhost:3000/pitches/new" method="post">
-        <div>
-            <label for="title">Enter Title</label>
-            <input type="text" name="pitch[title]" id="title">
+<% layout("layouts/boilerplate") %>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">New Campground</h1>
+    <form action="http://localhost:3000/pitches" method="post" class="mx-auto" style="max-width: 600px;">
+        <div class="mb-3">
+            <label for="title" class="form-label">Enter Title</label>
+            <input type="text" name="pitch[title]" id="title" class="form-control">
         </div>
 
-        <div>
-            <label for="location">Enter Location</label>
-            <input type="text" name="pitch[location]" id="location">
+        <div class="mb-3">
+            <label for="location" class="form-label">Enter Location</label>
+            <input type="text" name="pitch[location]" id="location" class="form-control">
         </div>
 
-        <button>Add Pitch</button>
+        <div class="mb-3">
+            <label for="price" class="form-label">Enter Price</label>
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" name="pitch[price]" id="price" class="form-control" placeholder="0.00">
+            </div>
+        </div>
 
+        <div class="mb-3">
+            <label for="image" class="form-label">Enter Image URL</label>
+            <input type="text" name="pitch[image]" id="image" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Enter Description</label>
+            <input type="text" name="pitch[description]" id="description" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Add Pitch</button>
     </form>
-    <a href="http://localhost:3000/pitches">Back to Index</a>
-</body>
-
-</html>
+    <div class="mt-3 text-center">
+        <a href="http://localhost:3000/pitches" class="btn btn-link">All Pitches</a>
+    </div>
+</div>
