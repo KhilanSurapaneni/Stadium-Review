@@ -1,8 +1,8 @@
 const Joi = require("joi");
 
 // Create a JOI schema with custom error messages
-module.exports.pitchSchema = Joi.object({
-    pitch: Joi.object({
+module.exports.stadiumSchema = Joi.object({
+    stadium: Joi.object({
         title: Joi.string().required().messages({
             'string.base': 'Title should be a string.',
             'string.empty': 'Title is required.',

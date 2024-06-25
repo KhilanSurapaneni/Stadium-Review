@@ -1,8 +1,8 @@
 // Mongoose setup
 const mongoose = require("mongoose");
-const Pitch = require("../models/pitch")
+const Stadium = require("../models/stadium")
 const axios = require("axios");
-mongoose.connect('mongodb://localhost:27017/pitch-review')
+mongoose.connect('mongodb://localhost:27017/stadium-review')
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!!") // Logs a message when the connection is successfully opened.
     })
@@ -12,7 +12,7 @@ mongoose.connect('mongodb://localhost:27017/pitch-review')
     });
 
 const cities = require("./cities");
-const pitches = require("./seedHelpers");
+const stadiums = require("./seedHelpers");
 
 // call unsplash and return small image
 async function seedImg() {
@@ -20,7 +20,7 @@ async function seedImg() {
         const resp = await axios.get('https://api.unsplash.com/photos/random', {
         params: {
             client_id: 'RxRnvwTQZmsFMqpR1v2nDuQyYxG3aOyqwltGA711ITg',
-            collections: 11500479,
+            collections: 97680579,
         },
         })
         return resp.data.urls.small
@@ -31,12 +31,12 @@ async function seedImg() {
   
 
 const seedDB = async () => {
-    await Pitch.deleteMany({});
+    await Stadium.deleteMany({});
     for (let i = 0; i < 20; i++){
         const randNum = Math.floor(Math.random() * cities.length);
         const price = Math.floor(Math.random() * 20) + 10;
-        const p = new Pitch({
-            title: pitches[i],
+        const p = new Stadium({
+            title: stadiums[i],
             location: `${cities[randNum].city}, ${cities[randNum].state}`,
             image: await seedImg(),
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",

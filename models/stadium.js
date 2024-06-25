@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review = require("./review");
 
-const pitchSchema = new Schema({
+const stadiumSchema = new Schema({
     title: String,
     price: Number,
     description: String,
@@ -16,7 +16,7 @@ const pitchSchema = new Schema({
     ]
 })
 
-pitchSchema.post("findOneAndDelete", async (doc) => {
+stadiumSchema.post("findOneAndDelete", async (doc) => {
     if (doc && doc.reviews && doc.reviews.length > 0) {
         await Review.deleteMany({
             _id: { $in: doc.reviews }
@@ -25,4 +25,4 @@ pitchSchema.post("findOneAndDelete", async (doc) => {
 });
 
 
-module.exports = mongoose.model("Pitch", pitchSchema);
+module.exports = mongoose.model("Stadium", stadiumSchema);

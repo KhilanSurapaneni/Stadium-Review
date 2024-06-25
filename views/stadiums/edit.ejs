@@ -1,22 +1,22 @@
 <% layout("layouts/boilerplate") %>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Edit Campground</h1>
-    <form action="/pitches/<%= pitch._id %>?_method=PATCH" method="post" class="mx-auto needs-validation" novalidate style="max-width: 600px;">
+    <form action="/stadiums/<%= stadium._id %>?_method=PATCH" method="post" class="mx-auto needs-validation" novalidate style="max-width: 600px;">
         <div class="mb-3">
             <label for="title" class="form-label">Enter Title</label>
-            <input type="text" name="pitch[title]" id="title" value="<%= pitch.title %>" class="form-control" required>
+            <input type="text" name="stadium[title]" id="title" value="<%= stadium.title %>" class="form-control" required>
         </div>
 
         <div class="mb-3">
             <label for="location" class="form-label">Enter Location</label>
-            <input type="text" name="pitch[location]" id="location" value="<%= pitch.location %>" class="form-control" required>
+            <input type="text" name="stadium[location]" id="location" value="<%= stadium.location %>" class="form-control" required>
         </div>
 
         <div class="mb-3">
             <label for="price" class="form-label">Enter Price</label>
             <div class="input-group">
                 <span class="input-group-text">$</span>
-                <input type="number" name="pitch[price]" id="price" value="<%= pitch.price %>" class="form-control" step="0.01" placeholder="10.00" required>
+                <input type="number" name="stadium[price]" id="price" value="<%= stadium.price %>" class="form-control" step="0.01" placeholder="10.00" required>
                 <div class="invalid-feedback">
                     Please enter a valid dollar amount (e.g. 17.31, 16.01, etc.).
                 </div>
@@ -25,17 +25,17 @@
 
         <div class="mb-3">
             <label for="image" class="form-label">Enter Image URL</label>
-            <input type="text" name="pitch[image]" id="image" value="<%= pitch.image %>" class="form-control" required>
+            <input type="text" name="stadium[image]" id="image" value="<%= stadium.image %>" class="form-control" required>
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Enter Description</label>
-            <input type="text" name="pitch[description]" id="description" value="<%= pitch.description %>" class="form-control" required>
+            <input type="text" name="stadium[description]" id="description" value="<%= stadium.description %>" class="form-control" required>
         </div>
 
-        <button type="submit" class="btn btn-success w-100">Update Pitch</button>
+        <button type="submit" class="btn btn-success w-100">Update Stadium</button>
     </form>
     <div class="mt-3 text-center">
-        <a href="/pitches" class="btn btn-link">All Pitches</a>
+        <a href="/stadiums" class="btn btn-link">All Stadiums</a>
     </div>
 </div>
