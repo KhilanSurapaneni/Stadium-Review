@@ -28,11 +28,20 @@ module.exports.pitchSchema = Joi.object({
             'string.empty': 'Location is required.',
             'any.required': 'Location is a required field.'
         })
-    }).required().messages({
-        'object.base': 'Pitch should be an object.',
-        'any.required': 'Pitch is required.'
-    })
-}).required().messages({
-    'object.base': 'Request payload should be an object.',
-    'any.required': 'Request payload is required.'
+    }).required()
+});
+
+module.exports.reviewSchema = Joi.object({
+    review: Joi.object({
+        rating: Joi.number().required().min(1).max(5).messages({
+            'number.base': 'Rating must be a number.',
+            'number.min': 'Rating must be at least 1.',
+            'number.max': 'Rating must be at most 5.',
+            'any.required': 'Rating is required.'
+        }),
+        body: Joi.string().required().messages({
+            'string.base': 'Review must be a string.',
+            'any.required': 'Review body is required.'
+        })
+    }).required()
 });

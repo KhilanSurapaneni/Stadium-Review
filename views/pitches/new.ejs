@@ -1,7 +1,7 @@
 <% layout("layouts/boilerplate") %>
 <div class="container mt-5">
     <h1 class="text-center mb-4">New Campground</h1>
-    <form action="http://localhost:3000/pitches" method="post" class="mx-auto needs-validation" style="max-width: 600px;" novalidate>
+    <form action="/pitches" method="post" class="mx-auto needs-validation" style="max-width: 600px;" novalidate>
         <div class="mb-3">
             <label for="title" class="form-label">Enter Title</label>
             <input type="text" name="pitch[title]" id="title" class="form-control" required>
@@ -36,6 +36,6 @@
         <button type="submit" class="btn btn-success w-100">Add Pitch</button>
     </form>
     <div class="mt-3 text-center">
-        <a href="http://localhost:3000/pitches" class="btn btn-link">All Pitches</a>
+        <a href="/pitches" class="btn btn-link">All Pitches</a>
     </div>
 </div>

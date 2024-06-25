@@ -3,11 +3,12 @@ const app = express();
 const mongoose = require("mongoose");
 const Pitch = require("./models/pitch");
 const Joi = require("joi")
-const {pitchSchema} = require("./schemas");
+const {pitchSchema,reviewSchema} = require("./schemas");
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require("./utils/expressError");
 const methodOverride = require('method-override');
 const path = require("path");
+const Review = require("./models/review");
 
 // Mongoose setup
 mongoose.connect('mongodb://localhost:27017/pitch-review')
@@ -32,6 +33,16 @@ app.use(methodOverride('_method'));
 //middleware for validaion
 const validatePitch = (req, res, next) => {
     const { error } = pitchSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+}
+
+const validateReview = (req,res,next) => {
+    const { error } = reviewSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',');
         throw new ExpressError(msg, 400);
@@ -67,7 +78,7 @@ app.get("/pitches/edit/:id", catchAsync(async (req, res) => {
 
 app.get("/pitches/:id", catchAsync(async (req, res) => {
     const { id } = req.params;
-    const pitch = await Pitch.findById(id);
+    const pitch = await Pitch.findById(id).populate("reviews");
     res.render("pitches/details", { pitch });
 }));
 
@@ -81,7 +92,25 @@ app.delete("/pitches/:id", catchAsync(async (req, res) => {
     const { id } = req.params;
     await Pitch.findByIdAndDelete(id);
     res.redirect("/pitches");
-}));
+}))
+
+app.post("/pitches/:id/reviews", validateReview, catchAsync(async (req,res) => {
+    const { id } = req.params;
+    const pitch = await Pitch.findById(id);
+
+    const review = new Review(req.body.review);
+    pitch.reviews.push(review);
+    await review.save();
+    await pitch.save();
+    res.redirect(`/pitches/${id}`);
+}))
+
+app.delete("/pitches/:pitchID/reviews/:reviewID", catchAsync(async (req,res) => {
+    const {pitchID , reviewID} = req.params;
+    await Review.findByIdAndDelete(reviewID);
+    await Pitch.findByIdAndUpdate(pitchID, {$pull: {reviews: reviewID}});
+    res.redirect(`/pitches/${pitchID}`);
+}))
 
 //this is for every path, will only run if nothing is matched
 app.all("*", (req, res, next) => {
