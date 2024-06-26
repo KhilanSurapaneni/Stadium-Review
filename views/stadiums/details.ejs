@@ -16,14 +16,14 @@
                         <%= stadium.location %>
                     </h6>
                     <p class="card-text">
-                        <small class="text-muted">$<%= stadium.price %>/night</small>
+                        <small class="text-muted">$<%= stadium.price %>/day</small>
                     </p>
                     <a href="/stadiums/edit/<%= stadium._id %>" class="btn btn-primary btn-sm">Edit</a>
                     <form action="/stadiums/<%= stadium._id %>?_method=DELETE" method="post" class="d-inline">
                         <button class="btn btn-danger btn-sm">Delete</button>
                     </form>
                     <p class="card-text mt-2">
-                        <small class="text-muted">2 days ago</small>
+                        <small class="text-muted">X days ago</small>
                     </p>
                 </div>
             </div>

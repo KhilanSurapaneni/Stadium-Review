@@ -34,7 +34,7 @@ const seedDB = async () => {
     await Stadium.deleteMany({});
     for (let i = 0; i < 20; i++){
         const randNum = Math.floor(Math.random() * cities.length);
-        const price = Math.floor(Math.random() * 20) + 10;
+        const price = Math.floor(Math.random() * 100000) + 100000;
         const p = new Stadium({
             title: stadiums[i],
             location: `${cities[randNum].city}, ${cities[randNum].state}`,
