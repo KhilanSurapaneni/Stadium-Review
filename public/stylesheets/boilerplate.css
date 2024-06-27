@@ -71,6 +71,7 @@
     animation: slideIn 0.5s ease-in-out forwards;
 }
 
-.footer{
+.footer {
+    color: black;
     font-weight: bold;
 }

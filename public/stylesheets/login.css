@@ -1,0 +1,43 @@
+/* Container styling */
+.container {
+    max-width: 400px;
+}
+
+/* Heading styling */
+.container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333;
+    font-weight: bold;
+}
+
+/* Form label styling */
+.form-label {
+    font-weight: bold;
+    color: #333333;
+}
+
+
+/* Invalid feedback styling */
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 14px;
+}
+
+/* Submit button styling */
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border-color: orange;
+    font-weight: bold;
+    background-color: transparent;
+    color: orange;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: orange;
+    transform: scale(1.02);
+}
