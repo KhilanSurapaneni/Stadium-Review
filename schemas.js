@@ -13,10 +13,9 @@ module.exports.stadiumSchema = Joi.object({
             'number.min': 'Price should be at least 0.',
             'any.required': 'Price is a required field.'
         }),
-        image: Joi.string().required().messages({
-            'string.base': 'Image URL should be a string.',
-            'string.empty': 'Image URL is required.',
-            'any.required': 'Image URL is a required field.'
+        image: Joi.required().messages({
+            'string.empty': 'You must upload an Image.',
+            'any.required': 'You must upload an Image.'
         }),
         description: Joi.string().required().messages({
             'string.base': 'Description should be a string.',

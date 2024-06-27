@@ -12,7 +12,9 @@ const render_new = (req, res) => {
 const add_stadium = async (req, res) => {
     const stadium = new Stadium(req.body.stadium);
     stadium.author = req.user._id;
+    stadium.images = req.files.map(f => ({url: f.path, filename: f.filename}));
     await stadium.save();
+    console.log(stadium);
     req.flash("success", `Succesfully added ${stadium.title}`);
     res.redirect(`/stadiums/${stadium._id}`);
 }
@@ -40,7 +42,10 @@ const show_stadium = async (req, res) => {
 
 const update_stadium = async (req, res) => {
     const { id } = req.params;
-    const stadium = await Stadium.findByIdAndUpdate(id, req.body.stadium, { new: true });
+    const stadium = await Stadium.findByIdAndUpdate(id, {...req.body.stadium}, { new: true });
+    const images = req.files.map(f => ({url: f.path, filename: f.filename}));
+    stadium.images.push(...images);
+    await stadium.save();
     req.flash("success", `Succesfully edited ${stadium.title}`);
     res.redirect(`/stadiums/${stadium._id}`);
 }

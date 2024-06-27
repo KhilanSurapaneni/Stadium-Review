@@ -1,7 +1,7 @@
 <% layout("layouts/boilerplate") %>
 <div class="container mt-5">
     <h1 class="text-center mb-4">New Stadium</h1>
-    <form action="/stadiums" method="post" class="mx-auto needs-validation" style="max-width: 600px;" novalidate>
+    <form action="/stadiums" method="post" class="mx-auto needs-validation" style="max-width: 600px;" enctype="multipart/form-data" novalidate>
         <div class="mb-3">
             <label for="title" class="form-label">Enter Title</label>
             <input type="text" name="stadium[title]" id="title" class="form-control" required>
@@ -24,8 +24,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="image" class="form-label">Enter Image URL</label>
-            <input type="text" name="stadium[image]" id="image" class="form-control" required>
+            <label for="image" class="form-label">Add Images</label>
+            <input type="file" name="image" id="image" class="form-control" required multiple>
         </div>
 
         <div class="mb-3">

@@ -39,7 +39,16 @@ const seedDB = async () => {
             author: "667c9b4cd69bb039bb9b09ee",
             title: stadiums[i],
             location: `${cities[randNum].city}, ${cities[randNum].state}`,
-            image: await seedImg(),
+            images: [
+                {
+                  url: 'https://res.cloudinary.com/de9u6w1i2/image/upload/v1719508455/StadiumReview/wdztrfqv9mftfelwgy4g.jpg',
+                  filename: 'StadiumReview/wdztrfqv9mftfelwgy4g'
+                },
+                {
+                  url: 'https://res.cloudinary.com/de9u6w1i2/image/upload/v1719508455/StadiumReview/fv2jyqrwzdqltczxygpy.jpg',
+                  filename: 'StadiumReview/fv2jyqrwzdqltczxygpy'
+                }
+            ],
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
             price
         })
