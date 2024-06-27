@@ -10,15 +10,15 @@ router.route("/")
     .get(catchAsync(render_index))
     .post(isLoggedIn, validateStadium, catchAsync(add_stadium));
 
-router.route("/:id")
-    .get(catchAsync(show_stadium))
-    .patch(isLoggedIn, isAuthor, validateStadium, catchAsync(update_stadium))
-    .delete(isLoggedIn, isAuthor, catchAsync(delete_stadium));
-
 router.route("/new")
     .get(isLoggedIn, render_new);
 
 router.route("/edit/:id")
     .get(isLoggedIn, isAuthor, catchAsync(render_edit));
+
+router.route("/:id")
+    .get(catchAsync(show_stadium))
+    .patch(isLoggedIn, isAuthor, validateStadium, catchAsync(update_stadium))
+    .delete(isLoggedIn, isAuthor, catchAsync(delete_stadium));
 
 module.exports = router;
