@@ -8,6 +8,12 @@ const stadiumSchema = new Schema({
     description: String,
     location: String,
     image: String,
+    author: 
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ,
     reviews: [
         {
             type: Schema.Types.ObjectId,

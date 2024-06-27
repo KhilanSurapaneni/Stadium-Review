@@ -1,65 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const Stadium = require("../models/stadium");
-const {stadiumSchema} = require("../schemas");
 const catchAsync = require('../utils/catchAsync');
-const ExpressError = require("../utils/expressError");
+const {isLoggedIn,validateStadium, isAuthor} = require("../middleware");
+const {render_index, render_new, add_stadium, render_edit, show_stadium, update_stadium, delete_stadium} = require("../controllers/stadiums");
 
-//middleware for validaion
-const validateStadium = (req, res, next) => {
-    const { error } = stadiumSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError(msg, 400);
-    } else {
-        next();
-    }
-}
 
-router.get("/", catchAsync(async (req, res) => {
-    const stadiums = await Stadium.find({});
-    res.render("stadiums/index", { stadiums });
-}));
+router.route("/")
+    .get(catchAsync(render_index))
+    .post(isLoggedIn, validateStadium, catchAsync(add_stadium));
 
-router.get("/new", (req, res) => {
-    res.render("stadiums/new");
-});
+router.route("/:id")
+    .get(catchAsync(show_stadium))
+    .patch(isLoggedIn, isAuthor, validateStadium, catchAsync(update_stadium))
+    .delete(isLoggedIn, isAuthor, catchAsync(delete_stadium));
 
-router.post("/", validateStadium, catchAsync(async (req, res) => {
-    const stadium = new Stadium(req.body.stadium);
-    await stadium.save();
-    req.flash("success", `Succesfully added ${stadium.title}`);
-    res.redirect(`/stadiums/${stadium._id}`);
-}));
+router.route("/new")
+    .get(isLoggedIn, render_new);
 
-router.get("/edit/:id", catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const stadium = await Stadium.findById(id);
-    res.render("stadiums/edit", { stadium });
-}));
-
-router.get("/:id", catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const stadium = await Stadium.findById(id).populate("reviews");
-    if(!stadium){
-        req.flash("error", "We couldn't find that stadium");
-        res.redirect("/stadiums");
-    }
-    res.render("stadiums/details", { stadium });
-}));
-
-router.patch("/:id", validateStadium, catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const stadium = await Stadium.findByIdAndUpdate(id, req.body.stadium, { new: true });
-    req.flash("success", `Succesfully edited ${stadium.title}`);
-    res.redirect(`/stadiums/${stadium._id}`);
-}));
-
-router.delete("/:id", catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const stadium = await Stadium.findByIdAndDelete(id);
-    req.flash("success", `Succesfully deleted ${stadium.title}`);
-    res.redirect("/stadiums");
-}))
+router.route("/edit/:id")
+    .get(isLoggedIn, isAuthor, catchAsync(render_edit));
 
 module.exports = router;

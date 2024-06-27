@@ -1,4 +1,12 @@
 <% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+<style>
+    .card-img-top {
+        width: 100%; /* Ensure the image takes up full width of its container */
+        height: 250px; /* Set a fixed height */
+        object-fit: cover; /* Ensure the image covers the entire area while maintaining aspect ratio */
+    }
+</style>
 <div class="container mt-5">
     <div class="row">
         <!-- Stadium Card on the Left -->
@@ -13,34 +21,47 @@
                         <%= stadium.description %>
                     </p>
                     <h6 class="card-subtitle mb-2 text-muted">
-                        <%= stadium.location %>
+                        <b><%= stadium.location %></b>
                     </h6>
                     <p class="card-text">
                         <small class="text-muted">$<%= stadium.price %>/day</small>
                     </p>
-                    <a href="/stadiums/edit/<%= stadium._id %>" class="btn btn-primary btn-sm">Edit</a>
-                    <form action="/stadiums/<%= stadium._id %>?_method=DELETE" method="post" class="d-inline">
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                    <p class="card-text mt-2">
-                        <small class="text-muted">X days ago</small>
-                    </p>
+                </div>
+                <div class="card-footer bg-light d-flex justify-content-between align-items-center">
+                    <div>
+                        <small class="text-muted">Added by <%= stadium.author.username %>, X days ago</small>
+                    </div>
+                    <% if(currUser && stadium.author._id.equals(currUser._id)) {%>
+                        <div>
+                            <a href="/stadiums/edit/<%= stadium._id %>" class="btn btn-primary btn-sm">Edit</a>
+                            <form action="/stadiums/<%= stadium._id %>?_method=DELETE" method="post" class="d-inline">
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    <% } %>
                 </div>
             </div>
-        </div>
+        </div>             
         <!-- Review Section on the Right -->
         <div class="col-md-6">
             <div class="card mb-3">
                 <div class="card-body">
                     <h2>Leave a Review</h2>
                     <form action="/stadiums/<%= stadium._id %>/reviews" method="post" class="p-3 border rounded validated-form" novalidate>
-                        <div class="form-group">
-                            <label for="rating">Rating</label>
-                            <input type="range" class="form-range" min="1" max="5" name="review[rating]" id="rating" value="3" required>
-                            <div class="invalid-feedback">
-                                Please select a rating.
-                            </div>
-                        </div>
+                        <fieldset class="starability-basic">
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
+                                aria-label="No rating." />
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
                         <div class="form-group mt-3">
                             <label for="body">Review</label>
                             <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
@@ -59,14 +80,21 @@
                 <% for (let review of stadium.reviews) { %>
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">Rating: <%= review.rating %>/5</h5>
+                            <p class="starability-result" data-rating="<%=review.rating%>">
+                                Rated: <%= review.rating %> stars
+                            </p>
                             <p class="card-text"><%= review.body %></p>
-                            <form action="/stadiums/<%=stadium._id%>/reviews/<%=review._id%>?_method=DELETE" method="post">
-                                <button class="btn btn-sm btn-danger">Delete</button>
+                        </div>
+                        <div class="card-footer bg-light d-flex justify-content-between align-items-center">
+                            <small class="text-muted">by <%= review.author.username %></small>
+                            <form action="/stadiums/<%= stadium._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
+                                <%if(currUser && review.author._id.equals(currUser._id)){%> 
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                <% } %>
                             </form>
                         </div>
                     </div>
-                <% } %>
+                <% } %>                                                            
             </div>
         </div>
     </div>

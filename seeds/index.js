@@ -36,6 +36,7 @@ const seedDB = async () => {
         const randNum = Math.floor(Math.random() * cities.length);
         const price = Math.floor(Math.random() * 100000) + 100000;
         const p = new Stadium({
+            author: "667c9b4cd69bb039bb9b09ee",
             title: stadiums[i],
             location: `${cities[randNum].city}, ${cities[randNum].state}`,
             image: await seedImg(),
