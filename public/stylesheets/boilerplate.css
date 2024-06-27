@@ -1,0 +1,76 @@
+/* General styling for the navbar */
+.navbar {
+    background-color: #333333; /* Dark background for contrast */
+    transition: background-color 0.3s ease;
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important; /* Light text color for contrast */
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Navbar toggle button animation */
+.navbar-toggler-icon {
+    transition: transform 0.3s ease;
+}
+
+.navbar-toggler:hover .navbar-toggler-icon {
+    transform: rotate(90deg);
+}
+
+/* Navbar link hover effect */
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #ffc107 !important;
+    transform: scale(1.1);
+}
+
+/* Navbar link underline effect */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #ffc107;
+    transition: width 0.4s ease;
+    -webkit-transition: width 0.4s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
+    background: #ffc107;
+}
+
+/* Collapse navbar animation */
+.collapse {
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.collapse.show {
+    max-height: 500px; /* Adjust based on your content height */
+}
+
+/* Animations */
+@keyframes slideIn {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.navbar {
+    animation: slideIn 0.5s ease-in-out forwards;
+}
+
+.footer{
+    font-weight: bold;
+}

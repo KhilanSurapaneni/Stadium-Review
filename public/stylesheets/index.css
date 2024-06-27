@@ -1,0 +1,5 @@
+.card-img-top {
+    width: 100%; /* Ensure the image takes up full width of its container */
+    height: 250px; /* Set a fixed height */
+    object-fit: cover; /* Ensure the image covers the entire area while maintaining aspect ratio */
+}

@@ -1,0 +1,93 @@
+/* custom.css */
+body {
+    background-image: url("/Stadium atmosphere.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100vh; /* Ensure it covers the full viewport height */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark tint */
+    z-index: 1;
+}
+
+.container, .navbar, .footer {
+    position: relative;
+    z-index: 2; /* Ensure content is above the dark tint */
+}
+
+.navbar {
+    background-color: transparent !important; /* Make navbar transparent */
+    border-bottom: none; /* Remove any border if present */
+}
+
+.footer {
+    background-color: transparent; /* Make footer transparent */
+}
+
+/* General styling for the container */
+.container {
+    padding: 2rem;
+}
+
+/* Styling for the heading */
+h1 {
+    font-size: 3rem;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Styling for the lead paragraph */
+.lead {
+    font-size: 1.25rem;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Styling for the button */
+.btn-primary {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    background-color: transparent;
+    border-color: orange; /* Set border color to orange */
+    color: orange;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+.btn-primary:hover {
+    background-color: orange; /* Darker shade of primary color */
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+.footer{
+    color: white;
+}

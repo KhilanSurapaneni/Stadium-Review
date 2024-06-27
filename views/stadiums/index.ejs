@@ -1,16 +1,7 @@
 <% layout("layouts/boilerplate") %>
-<style>
-    .card-img-top {
-        width: 100%; /* Ensure the image takes up full width of its container */
-        height: 250px; /* Set a fixed height */
-        object-fit: cover; /* Ensure the image covers the entire area while maintaining aspect ratio */
-    }
-</style>
+<link rel="stylesheet" href="/stylesheets/index.css">
 <div class="container mt-5">
     <h1 class="mb-4">All Stadiums</h1>
-    <div class="mb-4">
-        <a href="/stadiums/new" class="btn btn-success">Add New Stadium</a>
-    </div>
     <% for (let stadium of stadiums) { %>
         <div class="card mb-4 shadow-sm">
             <div class="row g-0">
