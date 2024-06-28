@@ -11,7 +11,6 @@ mongoose.connect('mongodb://localhost:27017/stadium-review')
         console.log(err) // Logs the error details.
     });
 
-const cities = require("./cities");
 const stadiums = require("./seedHelpers");
 
 // call unsplash and return small image
