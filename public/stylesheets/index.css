@@ -1,5 +1,77 @@
+/* Container styling */
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* Heading styling */
+.container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333333;
+    font-weight: bold;
+}
+
+/* Card styling */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
 .card-img-top {
     width: 100%; /* Ensure the image takes up full width of its container */
-    height: 250px; /* Set a fixed height */
+    height: 100%; /* Ensure the image takes up full height of its container */
     object-fit: cover; /* Ensure the image covers the entire area while maintaining aspect ratio */
+}
+
+/* Card body styling */
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333;
+}
+
+.card-text {
+    color: #666666;
+}
+
+/* Submit button styling */
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border-color: orange;
+    font-weight: bold;
+    background-color: transparent;
+    color: orange;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: orange;
+    transform: scale(1.02);
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+    }
+
+    .card-img-top {
+        height: auto;
+    }
 }

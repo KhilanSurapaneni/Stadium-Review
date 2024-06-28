@@ -32,6 +32,12 @@ body::before {
     border-bottom: none; /* Remove any border if present */
 }
 
+.navbar-brand, .nav-link {
+    color: white !important; /* Dark text color for contrast */
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
 .footer {
     background-color: transparent; /* Make footer transparent */
 }

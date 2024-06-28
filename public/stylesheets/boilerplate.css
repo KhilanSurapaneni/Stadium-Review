@@ -1,11 +1,11 @@
 /* General styling for the navbar */
 .navbar {
-    background-color: #333333; /* Dark background for contrast */
+    background-color: white; /* Light background for contrast */
     transition: background-color 0.3s ease;
 }
 
 .navbar-brand, .nav-link {
-    color: #ffffff !important; /* Light text color for contrast */
+    color: black !important; /* Dark text color for contrast */
     font-weight: bold;
     transition: color 0.3s ease, transform 0.3s ease;
 }
