@@ -1,0 +1,144 @@
+/* General Card styling */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 15px; /* Reduced margin for a smaller appearance */
+    background-color: #555555; /* Matching the card background color */
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Card body styling */
+.card-body {
+    padding: 15px; /* Reduced padding for a smaller appearance */
+    text-align: center;
+}
+
+.bold-white-text {
+    font-weight: bold;
+    color: white;
+}
+
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white; /* White color for the title */
+}
+
+.card-text {
+    font-size: 80%;
+    text-align: inherit;
+    color: #D3D3D3; /* Muted gray-white color for the text */
+}
+
+.btn{
+    font-weight: bold;
+}
+/* Smaller buttons */
+.btn-primary, .btn-danger {
+    padding: 5px 10px;
+}
+
+/* Button color changes */
+.btn-primary {
+    padding: 5px 10px;
+    background-color: #34576a; /* Darker muted blue background */
+    border-color: #34576a; /* Darker muted blue border */
+    color: white; /* White text color */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Adding transition effect */
+}
+
+.btn-primary:hover {
+    background-color: #34576a; /* Even darker muted blue background on hover */
+    transform: scale(1.02); /* Slightly enlarge button on hover */
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Larger success button */
+.btn-success {
+    padding: 5px 10px;
+    background-color: orange; /* Orange background */
+    border-color: orange; /* Orange border */
+    color: white; /* White text color */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Adding transition effect */
+}
+
+.btn-success:hover {
+    background-color: #e68a00; /* Darker orange background on hover */
+    transform: scale(1.02); /* Slightly enlarge button on hover */
+}
+
+/* Footer styling */
+.card-footer {
+    background-color: #333333; /* Dark background color for footer */
+    padding: 10px;
+    color: #D3D3D3; /* Muted gray-white text color for footer */
+}
+
+/* Review section styling */
+h5, h6 {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px; /* Reduced margin for a smaller appearance */
+    color: white; /* White color for headings */
+}
+
+/* Form styling */
+.validated-form {
+    padding: 15px; /* Reduced padding for a smaller appearance */
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    background-color: #333333; /* Dark background for form */
+    color: white; /* White text color for form */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #555555; /* Matching background color for input fields */
+    color: white; /* White text color for input fields */
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 1px solid orange; /* Highlight border in orange */
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 14px;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+    }
+
+    .card-img-top {
+        height: auto;
+    }
+
+    .carousel-inner {
+        text-align: center;
+    }
+}

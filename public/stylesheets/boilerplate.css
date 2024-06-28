@@ -1,11 +1,15 @@
+body{
+    background-color: #444444;
+}
+
 /* General styling for the navbar */
 .navbar {
-    background-color: white; /* Light background for contrast */
+    background-color: transparent; /* Light background for contrast */
     transition: background-color 0.3s ease;
 }
 
 .navbar-brand, .nav-link {
-    color: black !important; /* Dark text color for contrast */
+    color: white !important; 
     font-weight: bold;
     transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -72,6 +76,44 @@
 }
 
 .footer {
-    color: black;
+    color: gray;
     font-weight: bold;
 }
+
+/* Flash message container */
+.flash-message {
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Success message styling */
+.flash-message.success {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb; /* Light green border */
+}
+
+/* Error message styling */
+.flash-message.error {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    border: 1px solid #f5c6cb; /* Light red border */
+}
+
+/* Close button styling */
+.flash-message .close-btn {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: inherit;
+    cursor: pointer;
+    line-height: 1;
+}
+
+

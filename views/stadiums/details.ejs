@@ -1,145 +1,115 @@
 <% layout("layouts/boilerplate") %>
-    <link rel="stylesheet" href="/stylesheets/stars.css">
-    <style>
-        .card-img-top {
-            width: 100%;
-            /* Ensure the image takes up full width of its container */
-            height: 250px;
-            /* Set a fixed height */
-            object-fit: cover;
-            /* Ensure the image covers the entire area while maintaining aspect ratio */
-        }
-    </style>
-    <div class="container mt-5">
-        <div class="row">
-            <!-- Stadium Card on the Left -->
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <!-- image carousel -->
-                    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
-                        
-                        <div class="carousel-inner">
-                            <% for(let i=0; i < stadium.images.length; i++){ %>
-                                <% if (i===0){ %>
-                                    <div class="carousel-item active">
-                                        <img class="d-block w-100" src="<%= stadium.images[i].url %>" alt=" Image <%=i%>">
-                                    </div>
-                                <% }else{ %>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100" src="<%= stadium.images[i].url %>" alt=" Image <%=i%>">
-                                    </div>
-                                <% } %>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+<link rel="stylesheet" href="/stylesheets/details.css">
+<style>
+    .card-img-top {
+        width: 100%;
+        /* Ensure the image takes up full width of its container */
+        height: 250px;
+        /* Set a fixed height */
+        object-fit: cover;
+        /* Ensure the image covers the entire area while maintaining aspect ratio */
+    }
+</style>
+<div class="container mt-5">
+    <div class="row">
+        <!-- Stadium Card on the Left -->
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <!-- image carousel -->
+                <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <% for(let i=0; i < stadium.images.length; i++){ %>
+                            <% if (i===0){ %>
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="<%= stadium.images[i].url %>" alt=" Image <%=i%>">
+                                </div>
+                            <% }else{ %>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="<%= stadium.images[i].url %>" alt=" Image <%=i%>">
+                                </div>
                             <% } %>
-                        </div>
-                        
-                        <% if(stadium.images.length > 1) {%>
-                            
-                            <a class="carousel-control-prev" href="#imageCarousel" role="button"
-                            data-slide="prev">
+                        <% } %>
+                    </div>
+                    <% if(stadium.images.length> 1) {%>
+                        <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only"></span>
-                            </a>
-                        
-                            <a class="carousel-control-next" href="#imageCarousel" role="button"
-                                data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only"></span>
-                            </a>
-                        <% } %>
-                    </div>
-
-                    <!-- Stadium Info -->
-                    <div class="card-body text-center">
-                        <h5 class="card-title">
-                            <%= stadium.title %>
-                        </h5>
-                        <p class="card-text">
-                            <%= stadium.description %>
-                        </p>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            <b>
-                                <%= stadium.location %>
-                            </b>
-                        </h6>
-                        <p class="card-text">
-                            <small class="text-muted">$<%= stadium.price %>/day</small>
-                        </p>
-                    </div>
-                    <div class="card-footer bg-light d-flex justify-content-between align-items-center">
+                        </a>
+                        <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only"></span>
+                        </a>
+                    <% } %>
+                </div>
+                <!-- Stadium Info -->
+                <div class="card-body text-center">
+                    <h5 class="card-title"><%= stadium.title %></h5>
+                    <p class="card-text"><%= stadium.description %></p>
+                    <h6 class="card-subtitle mb-2 text-muted"><b style="color: orange;"><%= stadium.location %></b></h6>
+                    <p class="card-text"><small class="bold-white-text">$<%= stadium.price %> per day</small></p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div><small style="color: gray;">Added by <%= stadium.author.username %>, X days ago</small></div>
+                    <% if(currUser && stadium.author._id.equals(currUser._id)) {%>
                         <div>
-                            <small class="text-muted">Added by <%= stadium.author.username %>, X days ago</small>
+                            <a href="/stadiums/edit/<%= stadium._id %>" class="btn btn-primary btn-sm">Edit</a>
+                            <form action="/stadiums/<%= stadium._id %>?_method=DELETE" method="post" class="d-inline">
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </form>
                         </div>
-                        <% if(currUser && stadium.author._id.equals(currUser._id)) {%>
-                            <div>
-                                <a href="/stadiums/edit/<%= stadium._id %>" class="btn btn-primary btn-sm">Edit</a>
-                                <form action="/stadiums/<%= stadium._id %>?_method=DELETE" method="post"
-                                    class="d-inline">
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </form>
-                            </div>
-                            <% } %>
-                    </div>
-                </div>
-            </div>
-            <!-- Review Section on the Right -->
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h2>Leave a Review</h2>
-                        <form action="/stadiums/<%= stadium._id %>/reviews" method="post"
-                            class="p-3 border rounded validated-form" novalidate>
-                            <fieldset class="starability-basic">
-                                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1"
-                                    checked aria-label="No rating." />
-                                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-                                <label for="first-rate1" title="Terrible">1 star</label>
-                                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-                                <label for="first-rate2" title="Not good">2 stars</label>
-                                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-                                <label for="first-rate3" title="Average">3 stars</label>
-                                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-                                <label for="first-rate4" title="Very good">4 stars</label>
-                                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-                                <label for="first-rate5" title="Amazing">5 stars</label>
-                            </fieldset>
-                            <div class="form-group mt-3">
-                                <label for="body">Review</label>
-                                <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3"
-                                    required></textarea>
-                                <div class="invalid-feedback">
-                                    Please provide a review.
-                                </div>
-                            </div>
-                            <div class="text-center mt-3">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="mt-5">
-                    <h3>Reviews</h3>
-                    <% for (let review of stadium.reviews) { %>
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <p class="starability-result" data-rating="<%=review.rating%>">
-                                    Rated: <%= review.rating %> stars
-                                </p>
-                                <p class="card-text">
-                                    <%= review.body %>
-                                </p>
-                            </div>
-                            <div class="card-footer bg-light d-flex justify-content-between align-items-center">
-                                <small class="text-muted">by <%= review.author.username %></small>
-                                <form action="/stadiums/<%= stadium._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                    method="post">
-                                    <%if(currUser && review.author._id.equals(currUser._id)){%>
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                        <% } %>
-                                </form>
-                            </div>
-                        </div>
-                        <% } %>
+                    <% } %>
                 </div>
             </div>
         </div>
+        <!-- Review Section on the Right -->
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5>Leave a Review</h5>
+                    <form action="/stadiums/<%= stadium._id %>/reviews" method="post" class="p-3 border rounded validated-form" novalidate>
+                        <fieldset class="starability-basic">
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+                        <div class="form-group mt-3">
+                            <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                            <div class="invalid-feedback">Please provide a review.</div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-5">
+                <h6>Reviews</h6>
+                <% for (let review of stadium.reviews) { %>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="starability-result" data-rating="<%=review.rating%>">Rated: <%= review.rating %> stars</p>
+                            <p class="card-text"><%= review.body %></p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <small style="color: gray;">by <%= review.author.username %></small>
+                            <form action="/stadiums/<%= stadium._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
+                                <%if(currUser && review.author._id.equals(currUser._id)){%>
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                <% } %>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
     </div>
+</div>

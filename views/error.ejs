@@ -1,17 +1,11 @@
 <% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/stylesheets/error.css">
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm border-danger">
                 <div class="card-header bg-danger text-white">
                     <h3 class="card-title"><%=err.message%></h3>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-subtitle mb-2 text-muted">Error Status: <%= err.status %></h5>
-                    <details class="bg-light p-3 border rounded">
-                        <summary class="text-primary">Stack Trace</summary>
-                        <pre><code><%= err.stack %></code></pre>
-                    </details>
                 </div>
                 <div class="card-footer text-center">
                     <a href="/" class="btn btn-primary">Go Home</a>
@@ -21,13 +15,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    body {
-        background-color: #f8f9fa;
-    }
-    pre {
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-</style>

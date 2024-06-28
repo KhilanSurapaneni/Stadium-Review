@@ -1,0 +1,92 @@
+/* Container styling */
+.container {
+    max-width: 600px;
+}
+
+/* Heading styling */
+.container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+/* Form label styling */
+.form-label {
+    font-weight: bold;
+    color: #D3D3D3; /* Muted gray-white color */
+}
+
+/* Form control styling */
+.form-control {
+    background-color: #333333; /* Dark background for input fields */
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.form-control:focus {
+    background-color: #333333; /* Maintain dark background */
+    color: white; /* Maintain text color */
+    box-shadow: none;
+    border: 1px solid orange; /* Highlight border in orange */
+}
+
+/* Invalid feedback styling */
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 14px;
+}
+
+/* Submit button styling */
+.btn-success {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border-color: orange;
+    font-weight: bold;
+    background-color: transparent;
+    color: orange;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: orange;
+    transform: scale(1.02);
+}
+
+/* File input button styling */
+input[type="file"] {
+    background-color: orange; /* Orange background */
+    color: white; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: orange; /* Orange background */
+    color: white; /* White text */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: darkorange; /* Darker orange on hover */
+}
+
+/* Input group text styling (e.g., dollar sign) */
+.input-group-text {
+    background-color: orange; /* Orange background */
+    color: white; /* White text */
+    border: none;
+    border-radius: 5px 0 0 5px; /* Rounded corners for the left side */
+}
+
+/* Placeholder text styling */
+.form-control::placeholder {
+    color: gray; /* White placeholder text */
+}

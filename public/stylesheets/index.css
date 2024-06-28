@@ -9,7 +9,7 @@
 .container h1 {
     text-align: center;
     margin-bottom: 30px;
-    color: #333333;
+    color: white;
     font-weight: bold;
 }
 
@@ -19,6 +19,7 @@
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #555555;
 }
 
 .card:hover {
@@ -40,11 +41,17 @@
 .card-title {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333333;
+    color: white;
 }
 
 .card-text {
-    color: #666666;
+    color: #D3D3D3;
+}
+
+/* Location text styling */
+.location-text {
+    font-weight: bold;
+    color: orange;
 }
 
 /* Submit button styling */

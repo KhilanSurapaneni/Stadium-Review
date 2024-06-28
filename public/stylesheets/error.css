@@ -1,0 +1,42 @@
+/* Container styling */
+.container {
+    max-width: 600px;
+}
+
+/* Card styling */
+.card {
+    background-color: #333333; /* Dark background */
+    border: 1px solid #FFDAB9; /* Muted orange border */
+    border-radius: 5px;
+    color: white; /* White text */
+}
+
+.card-header {
+    background-color: #dc3545; /* Danger background color */
+    color: white; /* White text */
+}
+
+.card-footer {
+    background-color: #333333; /* Match the card background */
+}
+
+/* Card title styling */
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.btn {
+    font-weight: bold;
+    background-color: #6c757d; /* Gray background */
+    color: white; /* White text */
+    border: 1px solid #6c757d; /* Gray border */
+    transition: transform 0.3s ease;
+}
+
+.btn:hover{
+    background-color: #5a6268; /* Darker gray background */
+    transform: scale(1.02);
+    border: 1px solid #5a6268; /* Gray border */
+}
+
