@@ -4,6 +4,8 @@ Welcome to Stadium Review, this simple web application showcases my elementary s
 
 Users can browse a list of stadiums, with information regarding its rental price, location , and description. Users can also browse reviews of the stadiums and post their own reviews, providing they make an account. They can also add, delete and edit stadiums.
 
+[Demo](https://www.wevideo.com/view/3491654617)
+
 ## Tech Stack
 **Frontend**: HTML, CSS, EJS, JavaScript  
 **Backend**: Node.js, Express.js, Mongoose  
